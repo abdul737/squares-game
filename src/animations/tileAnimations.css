@@ -1,0 +1,13 @@
+@keyframes emptyTileHover {
+  to {
+    -webkit-filter: contrast(0.83);
+    filter: contrast(0.83);
+  }
+}
+
+@keyframes emptyTileHover {
+  to {
+    -webkit-filter: contrast(0.83);
+    filter: contrast(0.83);
+  }
+}

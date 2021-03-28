@@ -2,7 +2,7 @@ import React, { useContext, useMemo } from "react";
 import { Paper, makeStyles, Theme } from "@material-ui/core";
 import { Players } from "../constants";
 import { useMediaDown } from "../utils";
-import { SettingsContext } from "../contexts";
+import { GameContext, SettingsContext } from "../contexts";
 
 interface ITileProps {
   index?: number;
@@ -23,21 +23,26 @@ const useStyles = makeStyles<Theme, { tileSize: number; }>((theme) => ({
     },
     '&.Player2': {
       backgroundColor: theme.palette.error.main,
-    }
+    },
+    '&.empty:hover': {
+      animationDuration: '200ms',
+      animationName: 'emptyTileHover',
+      animationFillMode: 'forwards',
+      '&.turn-Player1': {
+        backgroundColor: theme.palette.success.main,
+      },
+      '&.turn-Player2': {
+        backgroundColor: theme.palette.error.main,
+      },
+    },
   }),
 }));
 
-const getSquareClassName = (value?: Players) => {
-  if (value === Players.PLAYER_1) {
-    return 'Player1'
-  } else if (value === Players.PLAYER_2) {
-    return 'Player2'
-  }
-  return ''
-}
+const getSquareClassName = (value?: Players) => value ? value.replace(/ /g,'') : 'empty'
 
 export const Tile: React.FC<ITileProps> = ({ index, size, value, onClick, className }) => {
   const { boardSize } = useContext(SettingsContext);
+  const { turn } = useContext(GameContext);
   const isMobileScreen = useMediaDown('xs');
   const isSmallMobileScreen = useMediaDown(345);
   const tileSize = useMemo(
@@ -48,9 +53,9 @@ export const Tile: React.FC<ITileProps> = ({ index, size, value, onClick, classN
   const classes = useStyles({ tileSize });
 
   const handleClick = () => {
-    onClick && index && onClick(index)
+    onClick && index !== undefined && onClick(index)
   }
   return (
-    <Paper onClick={handleClick} className={`${classes.paper} ${getSquareClassName(value)} ${className}`}></Paper>
+    <Paper onClick={handleClick} className={`${classes.paper} ${getSquareClassName(value)} turn-${turn.replace(/ /g,'')} ${className}`}></Paper>
   )
 }

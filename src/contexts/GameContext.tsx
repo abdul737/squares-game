@@ -1,22 +1,23 @@
-import React, { useContext, useState } from "react"
+import React, { useContext } from "react"
 import { clone } from "lodash-es";
 import { Players } from "../constants"
 import { SettingsContext } from "./SettingsContext";
+import { useAutoSavedState } from "../Hooks";
 
 interface IDefaultGameState {
   turn: Players;
 }
 
-interface IState extends IDefaultGameState {
+interface IGameContextState extends IDefaultGameState {
   squares: Players[];
 }
 
-interface IContextProps extends IState {
+interface IGameContextValue extends IGameContextState {
   performTurn: (index: number) => void;
   restartGame: () => void;
 }
 
-export const GameContext = React.createContext({} as IContextProps);
+export const GameContext = React.createContext({} as IGameContextValue);
 
 const defaultGameState: IDefaultGameState = {
   turn: Players.PLAYER_1,
@@ -24,10 +25,10 @@ const defaultGameState: IDefaultGameState = {
 
 export const GameContextProvider: React.FC = ({ children }) => {
   const { boardSize } = useContext(SettingsContext);
-  const [state, setState] = useState<IState>({
+  const [state, setState] = useAutoSavedState<IGameContextState>({
     ...defaultGameState,
     squares: Array.from(new Array(boardSize * boardSize)),
-  });
+  }, 'GameContext');
 
   const toggleTurn = (turn: Players): Players => {
     if (turn === Players.PLAYER_1) {
