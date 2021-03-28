@@ -1,19 +1,23 @@
-import React, { useContext } from "react";
-import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from "@material-ui/core";
+import React from "react";
+import { Box, FormControlLabel, FormLabel, Radio, RadioGroup } from "@material-ui/core";
 import { BOARD_SIZES } from "../../constants";
-import { SettingsContext } from "../../contexts";
 import { getLabel } from "../../utils";
 
-export const ChooseBoardSize: React.FC = () => {
-  const { boardSize, setBoardSize } = useContext(SettingsContext);
+interface IChooseBoardSizeProps {
+  boardSize: number;
+  setBoardSize: (size: number) => void;
+}
 
+export const ChooseBoardSize: React.FC<IChooseBoardSizeProps> = ({ boardSize, setBoardSize }) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setBoardSize(parseInt((event.target as HTMLInputElement).value));
   };
 
   return (
-    <FormControl component="fieldset">
-      <FormLabel component="legend">{getLabel('boardSize')}:</FormLabel>
+    <Box display="flex">
+      <Box mt={1.5} mr={2}>
+        <FormLabel component="legend">{getLabel('boardSize')}:</FormLabel>
+      </Box>
       <RadioGroup
         aria-label={getLabel('chooseBoardSize')}
         value={boardSize}
@@ -30,6 +34,6 @@ export const ChooseBoardSize: React.FC = () => {
           ))
         }
       </RadioGroup>
-    </FormControl>
+    </Box>
   )
 }

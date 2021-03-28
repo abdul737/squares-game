@@ -1,4 +1,4 @@
-export { Board } from './Board'
-export { Menu } from './Menu'
-export { Settings } from './Settings'
-export { Instructions } from './Instructions'
+export * from './Game'
+export * from './Menu'
+export * from './Settings'
+export * from './Instructions'

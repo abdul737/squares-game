@@ -4,7 +4,7 @@ import { useHistory } from "react-router";
 import { ROUTES } from "../constants";
 
 interface INavigationButtonProps {
-  path: ROUTES;
+  path?: ROUTES;
   children: React.ReactNode;
   onClick?: () => void
   variant?: "text" | "outlined" | "contained";
@@ -30,7 +30,7 @@ export const NavigationButton: React.FC<INavigationButtonProps> = ({
   const classes = useStyles();
 
   const handleClick = () => {
-    history.push(path)
+    path !== undefined && history.push(path)
     onClick && onClick()
   }
 

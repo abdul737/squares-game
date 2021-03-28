@@ -1,7 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Box, makeStyles, TextField } from "@material-ui/core";
 import { Players } from "../../constants";
-import { SettingsContext } from "../../contexts";
+import { PlayerNamesType } from "../../contexts";
+
+interface IPlayerNamesProps {
+  playerNames: PlayerNamesType;
+  setPlayerName: (playerNames: Players, name: string) => void;
+}
 
 const useStyles = makeStyles((theme) => ({
   inputs: {
@@ -15,8 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export const PlayerNames: React.FC = () => {
-  const { playerNames, setPlayerName } = useContext(SettingsContext);
+export const PlayerNames: React.FC<IPlayerNamesProps> = ({ playerNames, setPlayerName }) => {
   const classes = useStyles();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

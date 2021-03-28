@@ -1,11 +1,13 @@
-import React, { useContext } from "react"
+import React, { useCallback, useContext, useEffect } from "react"
 import { clone } from "lodash-es";
 import { Players } from "../constants"
-import { SettingsContext } from "./SettingsContext";
+import { PlayerNamesType, SettingsContext } from "./SettingsContext";
 import { useAutoSavedState } from "../Hooks";
 
 interface IDefaultGameState {
   turn: Players;
+  isGameOver: boolean;
+  winner: Players | null;
 }
 
 interface IGameContextState extends IDefaultGameState {
@@ -13,22 +15,74 @@ interface IGameContextState extends IDefaultGameState {
 }
 
 interface IGameContextValue extends IGameContextState {
-  performTurn: (index: number) => void;
+  startNewGame: (boardSize: number, playerNames: PlayerNamesType) => void;
   restartGame: () => void;
+  performTurn: (index: number) => void;
 }
 
 export const GameContext = React.createContext({} as IGameContextValue);
 
 const defaultGameState: IDefaultGameState = {
   turn: Players.PLAYER_1,
+  isGameOver: false,
+  winner: null,
 }
 
 export const GameContextProvider: React.FC = ({ children }) => {
-  const { boardSize } = useContext(SettingsContext);
+  const { boardSize, setBoardSize, setPlayerNames } = useContext(SettingsContext);
   const [state, setState] = useAutoSavedState<IGameContextState>({
     ...defaultGameState,
     squares: Array.from(new Array(boardSize * boardSize)),
   }, 'GameContext');
+
+
+  /**
+   * Counts connected squares of the given player, starting from index i
+   */
+   const getPlayerSquares = useCallback(
+    (player: Players, squares: any[], i: number = 0, usedIndexes: number[] = []): number => {
+      if (squares[i] !== player || usedIndexes.includes(i)) {
+        return 0;
+      }
+      usedIndexes.push(i)
+      return 1 + ((i + 1) % boardSize === 0 ? 0: getPlayerSquares(player, squares, i + 1, usedIndexes))
+        + ((i) % boardSize === 0 ? 0 : getPlayerSquares(player, squares, i - 1, usedIndexes))
+        + getPlayerSquares(player, squares, i - boardSize, usedIndexes)
+        + getPlayerSquares(player, squares, i + boardSize, usedIndexes)
+    }
+  , [boardSize]);
+
+  /**
+   * Finds winner or draw
+   */
+   const getWinner = useCallback((): Players | null => {
+    const max = {
+      [Players.PLAYER_1]: 0,
+      [Players.PLAYER_2]: 0,
+    }
+    state.squares.forEach((player, startIndex) => {
+      const count = getPlayerSquares(player, state.squares, startIndex);
+      if (count > max[player]) {
+        max[player] = count;
+      }
+    })
+    if (max[Players.PLAYER_1] > max[Players.PLAYER_2]) {
+      return Players.PLAYER_1;
+    } else if (max[Players.PLAYER_2] > max[Players.PLAYER_1]) {
+      return Players.PLAYER_2;
+    }
+    return null
+  }, [state.squares, getPlayerSquares])
+
+  useEffect(() => {
+    if (state.squares.every(square => !!square)) {
+      setState(state => ({
+        ...state,
+        isGameOver: true,
+        winner: getWinner(),
+      }))
+    }
+  }, [state.squares, setState, getWinner])
 
   const toggleTurn = (turn: Players): Players => {
     if (turn === Players.PLAYER_1) {
@@ -57,6 +111,16 @@ export const GameContextProvider: React.FC = ({ children }) => {
     })
   }
 
+  const startNewGame = async (boardSize: number, playerNames: PlayerNamesType) => {
+    setBoardSize(boardSize);
+    setPlayerNames(playerNames);
+    setState(state => ({
+      ...state,
+      ...defaultGameState,
+      squares: Array.from(new Array(boardSize * boardSize)),
+    }));
+  }
+
   const restartGame = () => {
     setState(state => ({
       ...state,
@@ -68,8 +132,9 @@ export const GameContextProvider: React.FC = ({ children }) => {
   return <GameContext.Provider
     value={{
       ...state,
-      performTurn,
+      startNewGame,
       restartGame,
+      performTurn,
     }}
   >
     {children}

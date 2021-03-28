@@ -6,42 +6,37 @@ import { GameContext, SettingsContext } from "../contexts";
 
 interface ITileProps {
   index?: number;
-  size?: number;
   value?: Players;
   onClick?: (index: number) => void;
+  size?: number;
+  color?: string;
   className?: string;
 }
 
-const useStyles = makeStyles<Theme, { tileSize: number; }>((theme) => ({
-  paper: ({ tileSize }) => ({
+interface IUseStylesProps {
+  tileSize: number;
+  nextColor: string;
+  tileColor?: string;
+}
+
+const useStyles = makeStyles<Theme, IUseStylesProps>((theme) => ({
+  paper: ({ tileSize, nextColor, tileColor }) => ({
     height: tileSize,
     width: tileSize,
     textAlign: 'center',
     color: theme.palette.text.secondary,
-    '&.Player1': {
-      backgroundColor: theme.palette.success.main,
-    },
-    '&.Player2': {
-      backgroundColor: theme.palette.error.main,
-    },
+    backgroundColor: tileColor || theme.palette.common.white,
     '&.empty:hover': {
       animationDuration: '200ms',
       animationName: 'emptyTileHover',
       animationFillMode: 'forwards',
-      '&.turn-Player1': {
-        backgroundColor: theme.palette.success.main,
-      },
-      '&.turn-Player2': {
-        backgroundColor: theme.palette.error.main,
-      },
+      backgroundColor: nextColor,
     },
   }),
 }));
 
-const getSquareClassName = (value?: Players) => value ? value.replace(/ /g,'') : 'empty'
-
-export const Tile: React.FC<ITileProps> = ({ index, size, value, onClick, className }) => {
-  const { boardSize } = useContext(SettingsContext);
+export const Tile: React.FC<ITileProps> = ({ index, size, value, onClick, className, color }) => {
+  const { boardSize, playerColorScheme } = useContext(SettingsContext);
   const { turn } = useContext(GameContext);
   const isMobileScreen = useMediaDown('xs');
   const isSmallMobileScreen = useMediaDown(345);
@@ -50,12 +45,16 @@ export const Tile: React.FC<ITileProps> = ({ index, size, value, onClick, classN
     [size, isMobileScreen, isSmallMobileScreen, boardSize]
   )
 
-  const classes = useStyles({ tileSize });
+  const classes = useStyles({
+    tileSize,
+    tileColor: color || (value && playerColorScheme[value]),
+    nextColor: playerColorScheme[turn]
+  });
 
   const handleClick = () => {
     onClick && index !== undefined && onClick(index)
   }
   return (
-    <Paper onClick={handleClick} className={`${classes.paper} ${getSquareClassName(value)} turn-${turn.replace(/ /g,'')} ${className}`}></Paper>
+    <Paper onClick={handleClick} className={`${classes.paper} ${className}`}></Paper>
   )
 }

@@ -1,13 +1,29 @@
 @keyframes emptyTileHover {
   to {
-    -webkit-filter: contrast(0.83);
     filter: contrast(0.83);
   }
 }
 
-@keyframes emptyTileHover {
+@keyframes rollToRight {
+  from {
+    opacity: 0;
+    left: 0;
+  }
   to {
-    -webkit-filter: contrast(0.83);
-    filter: contrast(0.83);
+    opacity: 1;
+    left: 50%;
+    transform: rotate(410deg);
+  }
+}
+
+@keyframes rollToLeft {
+  from {
+    opacity: 0;
+    right: 0;
+  }
+  to {
+    opacity: 1;
+    right: 50%;
+    transform: rotate(320deg);
   }
 }

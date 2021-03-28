@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useMemo } from "react";
 import { makeStyles, Box } from "@material-ui/core";
-import { AnimatedLogo, NavigationButton } from "../../components";
+import { LogoTiles, NavigationButton } from "../../components";
 import { ROUTES } from "../../constants";
 import { getLabel } from "../../utils";
 import { GameContext, SettingsContext } from "../../contexts";
@@ -9,9 +9,10 @@ const useStyles = makeStyles((theme) => ({
   menu: {
     display: 'flex',
     flexDirection: 'column',
+    alignItems: 'center',
   },
   menuItem: {
-    marginTop: theme.spacing(1)
+    marginBottom: theme.spacing(1)
   },
 }))
 
@@ -27,7 +28,7 @@ export const Menu: React.FC = () => {
 
   return (
     <Box className={classes.menu}>
-      <AnimatedLogo />
+      <LogoTiles animate />
       {
         canResume &&
         <Box className={classes.menuItem}>

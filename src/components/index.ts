@@ -1,3 +1,3 @@
 export * from './Tile'
 export * from './NavigationButton'
-export * from './AnimatedLogo'
+export * from './LogoTiles'
