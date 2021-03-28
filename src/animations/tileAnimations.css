@@ -1,6 +1,10 @@
 @keyframes emptyTileHover {
+  from {
+    filter: brightness(120%) contrast(70%);
+  }
   to {
-    filter: contrast(0.83);
+    filter: brightness(120%) contrast(70%);
+    transform: scale(0.97);
   }
 }
 

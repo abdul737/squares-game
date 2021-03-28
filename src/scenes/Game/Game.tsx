@@ -5,10 +5,11 @@ import {
 import { ROUTES } from '../../constants';
 import { NavigationButton, Tile } from '../../components';
 import { GameContext, SettingsContext } from '../../contexts';
-import { getLabel, useMediaDown } from '../../utils';
+import { getLabel } from '../../utils';
 import { GameOverOverlay } from './GameOverOverlay';
 import { Board } from './Board';
 import { ScoresBoard } from './ScoresBoard';
+import { useTileMargin } from './useTileMargin';
 
 const useStyles = makeStyles<Theme, { tileMargin: number }>((theme) => ({
   root: {
@@ -39,8 +40,8 @@ const useStyles = makeStyles<Theme, { tileMargin: number }>((theme) => ({
 export const Game: React.FC = () => {
   const { setBackgroundStyle, playerNames } = useContext(SettingsContext);
   const { turn, isGameOver } = useContext(GameContext);
-  const isMobileScreen = useMediaDown('xs');
-  const classes = useStyles({ tileMargin: isMobileScreen ? 0.25 : 0.5 });
+  const tileMargin = useTileMargin();
+  const classes = useStyles({ tileMargin });
 
   useEffect(() => {
     setBackgroundStyle('primary');

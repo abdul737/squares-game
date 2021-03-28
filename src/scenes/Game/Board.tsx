@@ -3,7 +3,7 @@ import { Box, makeStyles, Theme } from '@material-ui/core';
 import { Tile } from '../../components';
 import { Players } from '../../constants';
 import { SettingsContext, GameContext } from '../../contexts';
-import { useMediaDown } from '../../utils';
+import { useTileMargin } from './useTileMargin';
 
 const useStyles = makeStyles<Theme, { tileMargin: number }>((theme) => ({
   tileRow: {
@@ -17,8 +17,8 @@ const useStyles = makeStyles<Theme, { tileMargin: number }>((theme) => ({
 export const Board: React.FC = () => {
   const { boardSize } = useContext(SettingsContext);
   const { squares, performTurn } = useContext(GameContext);
-  const isMobileScreen = useMediaDown('xs');
-  const classes = useStyles({ tileMargin: isMobileScreen ? 0.25 : 0.5 });
+  const tileMargin = useTileMargin();
+  const classes = useStyles({ tileMargin });
 
   const tiles = useMemo(
     () => squares.reduce<Players[][]>((store, value, index) => {
