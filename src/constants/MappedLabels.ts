@@ -1,0 +1,16 @@
+export const MAPPED_LABELS = {
+  resumeGame: 'Resume game',
+  startGame: 'Start new game',
+  settings: 'Settings',
+  instructions: 'Instructions',
+  goBack: 'Go back',
+  menu: 'Menu',
+  save: 'Save',
+  cancel: 'Cancel',
+  chooseBoardSize: 'Choose the board size',
+  boardSize: 'Board size',
+  x3: 'Small (3x3)',
+  x4: 'Medium (4x4)',
+  x6: 'Large (6x6)',
+  x8: 'Extra Large (8x8)',
+}
