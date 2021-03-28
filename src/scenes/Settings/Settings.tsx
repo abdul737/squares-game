@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
-import { makeStyles, TextField, Box } from "@material-ui/core";
-import { Players, ROUTES } from "../../constants";
+import { makeStyles, Box } from "@material-ui/core";
+import { ROUTES } from "../../constants";
 import { NavigationButton } from "../../components";
 import { getLabel } from "../../utils";
 import { SettingsContext } from "../../contexts";
