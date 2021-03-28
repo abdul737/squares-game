@@ -51,7 +51,7 @@ export const Settings: React.FC = () => {
         <Box>
           {
             PLAYER_COLOR_SCHEMES.map((colorScheme, index) => (
-              <Box>
+              <Box key={index}>
                 <Button variant={colorSchemeIndex === index ? 'outlined': 'text'} onClick={() => setColorSchemeIndex(index)}>
                   <LogoTiles hideTitle size={50} colorScheme={colorScheme}/>
                 </Button>

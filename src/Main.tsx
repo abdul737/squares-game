@@ -6,7 +6,7 @@ import { SettingsContext } from './contexts';
 import { GameOptions } from './scenes/GameOptions';
 import { ROUTES } from './constants'
 
-const useStyles = makeStyles<Theme, { backgroundColor: string }>((theme) => ({
+const useStyles = makeStyles<Theme, { backgroundColor: string }>({
   mainContainer: ({ backgroundColor }) => ({
     display: 'flex',
     overflow: 'auto',
@@ -16,7 +16,7 @@ const useStyles = makeStyles<Theme, { backgroundColor: string }>((theme) => ({
     justifyContent: 'center',
     backgroundColor,
   })
-}));
+});
 
 const Main: React.FC = () => {
   const { backgroundColor } = useContext(SettingsContext);
