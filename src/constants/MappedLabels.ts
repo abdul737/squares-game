@@ -16,6 +16,7 @@ export const MAPPED_LABELS = {
   x4: 'Medium (4x4)',
   x6: 'Large (6x6)',
   x8: 'Extra Large (8x8)',
-  instructionsPageContent: 'Squares is a simple two player game where a square shaped game board is split to N*N squares. (2 ≤ N ≤ 8) Each player marks a square on their turn and at the end, the player with the biggest directly connecting squares group wins.',
+  instructionsPageContent:
+    'Squares is a simple two player game where a square shaped game board is split to N*N squares. (2 ≤ N ≤ 8) Each player marks a square on their turn and at the end, the player with the biggest directly connecting squares group wins.',
   score: 'Score',
-}
+};

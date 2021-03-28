@@ -1,15 +1,11 @@
-import React from "react";
-import { HashRouter as Router } from 'react-router-dom'
-import { GameContextProvider, SettingsContextProvider } from "./contexts";
+import React from 'react';
+import { HashRouter as Router } from 'react-router-dom';
+import { SettingsContextProvider, GameContextProvider } from './contexts';
 
-export const Providers: React.FC = ({ children }) => {
-  return (
-    <Router>
-      <SettingsContextProvider>
-        <GameContextProvider>
-          {children}
-        </GameContextProvider>
-      </SettingsContextProvider>
-    </Router>
-  )
-}
+export const Providers: React.FC<{ children: any }> = ({ children }) => (
+  <Router>
+    <SettingsContextProvider>
+      <GameContextProvider>{children}</GameContextProvider>
+    </SettingsContextProvider>
+  </Router>
+);

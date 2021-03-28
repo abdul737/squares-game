@@ -1,11 +1,11 @@
-import React, { useContext } from "react";
-import { Box, Typography, makeStyles } from "@material-ui/core"
-import { NavigationButton, Tile } from "../../components";
-import { ROUTES } from "../../constants";
-import { GameContext, SettingsContext } from "../../contexts";
-import { getLabel } from "../../utils";
+import React, { useContext } from 'react';
+import { Box, Typography, makeStyles } from '@material-ui/core';
+import { NavigationButton, Tile } from '../../components';
+import { ROUTES } from '../../constants';
+import { GameContext, SettingsContext } from '../../contexts';
+import { getLabel } from '../../utils';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     justifyContent: 'center',
@@ -48,7 +48,7 @@ export const GameOverOverlay: React.FC = () => {
     <Box className={classes.root}>
       <Box className={classes.overlayContent}>
         <Box className={classes.gameTurn}>
-          {winner !== null && <Tile className={classes.winnerTile} size={34} value={winner}/>}
+          {winner !== null && <Tile className={classes.winnerTile} size={34} value={winner} />}
           <Typography variant="h4" className={classes.endGameLabel}>
             {winner !== null ? `${playerNames[winner] || winner} won!` : 'Game over, Draw'}
           </Typography>
@@ -63,5 +63,5 @@ export const GameOverOverlay: React.FC = () => {
         </Box>
       </Box>
     </Box>
-  )
-}
+  );
+};

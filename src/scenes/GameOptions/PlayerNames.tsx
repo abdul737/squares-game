@@ -1,7 +1,7 @@
-import React from "react";
-import { Box, makeStyles, TextField } from "@material-ui/core";
-import { Players } from "../../constants";
-import { PlayerNamesType } from "../../contexts";
+import React from 'react';
+import { Box, makeStyles, TextField } from '@material-ui/core';
+import { Players } from '../../constants';
+import { PlayerNamesType } from '../../contexts';
 
 interface IPlayerNamesProps {
   playerNames: PlayerNamesType;
@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   settingsItem: {
     margin: theme.spacing(1),
   },
-}))
+}));
 
 export const PlayerNames: React.FC<IPlayerNamesProps> = ({ playerNames, setPlayerName }) => {
   const classes = useStyles();
@@ -26,7 +26,7 @@ export const PlayerNames: React.FC<IPlayerNamesProps> = ({ playerNames, setPlaye
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target as HTMLInputElement;
     setPlayerName(name as Players, value);
-  }
+  };
 
   return (
     <Box className={classes.inputs}>
@@ -49,5 +49,5 @@ export const PlayerNames: React.FC<IPlayerNamesProps> = ({ playerNames, setPlaye
         />
       </Box>
     </Box>
-  )
-}
+  );
+};

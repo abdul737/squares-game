@@ -1,12 +1,14 @@
-import React, { useContext, useEffect } from "react";
-import { makeStyles, Theme, Typography, Box } from '@material-ui/core'
-import { ROUTES } from "../../constants";
-import { NavigationButton, Tile } from "../../components";
-import { GameContext, SettingsContext } from "../../contexts";
-import { getLabel, useMediaDown } from "../../utils";
-import { GameOverOverlay } from "./GameOverOverlay";
+import React, { useContext, useEffect } from 'react';
+import {
+  makeStyles, Theme, Typography, Box,
+} from '@material-ui/core';
+import { ROUTES } from '../../constants';
+import { NavigationButton, Tile } from '../../components';
+import { GameContext, SettingsContext } from '../../contexts';
+import { getLabel, useMediaDown } from '../../utils';
+import { GameOverOverlay } from './GameOverOverlay';
 import { Board } from './Board';
-import { ScoresBoard } from "./ScoresBoard";
+import { ScoresBoard } from './ScoresBoard';
 
 const useStyles = makeStyles<Theme, { tileMargin: number }>((theme) => ({
   root: {
@@ -38,26 +40,26 @@ export const Game: React.FC = () => {
   const { setBackgroundStyle, playerNames } = useContext(SettingsContext);
   const { turn, isGameOver } = useContext(GameContext);
   const isMobileScreen = useMediaDown('xs');
-  const classes = useStyles({ tileMargin: isMobileScreen ? 0.25 : 0.50 });
+  const classes = useStyles({ tileMargin: isMobileScreen ? 0.25 : 0.5 });
 
   useEffect(() => {
     setBackgroundStyle('primary');
-  }, [setBackgroundStyle])
+  }, [setBackgroundStyle]);
 
   return (
     <Box className={classes.root}>
       <Box className={classes.gameTurn}>
-        <Tile className={classes.turnTile} size={34} value={turn}/>
+        <Tile className={classes.turnTile} size={34} value={turn} />
         <Typography variant="h4" className={classes.turnLabel}>
           {`Turn: ${playerNames[turn] || turn}`}
         </Typography>
       </Box>
-      <ScoresBoard/>
+      <ScoresBoard />
       <Board />
-      { isGameOver && <GameOverOverlay /> }
+      {isGameOver && <GameOverOverlay />}
       <Box className={classes.navigationButton}>
         <NavigationButton path={ROUTES.MENU}>{getLabel('menu')}</NavigationButton>
       </Box>
     </Box>
-  )
-}
+  );
+};

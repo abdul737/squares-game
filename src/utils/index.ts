@@ -1,2 +1,2 @@
-export * from './labelUtils'
-export * from './mediaQueries'
+export * from './labelUtils';
+export * from './mediaQueries';

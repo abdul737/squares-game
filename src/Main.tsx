@@ -1,10 +1,12 @@
 import React, { useContext } from 'react';
 import { Box, makeStyles, Theme } from '@material-ui/core';
-import { Game, Menu, Settings, Instructions } from './scenes';
 import { Route } from 'react-router';
+import {
+  Game, Menu, Settings, Instructions,
+} from './scenes';
 import { SettingsContext } from './contexts';
 import { GameOptions } from './scenes/GameOptions';
-import { ROUTES } from './constants'
+import { ROUTES } from './constants';
 
 const useStyles = makeStyles<Theme, { backgroundColor: string }>({
   mainContainer: ({ backgroundColor }) => ({
@@ -15,7 +17,7 @@ const useStyles = makeStyles<Theme, { backgroundColor: string }>({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor,
-  })
+  }),
 });
 
 const Main: React.FC = () => {
@@ -24,13 +26,13 @@ const Main: React.FC = () => {
 
   return (
     <Box className={classes.mainContainer}>
-      <Route exact path={ROUTES.MENU} component={Menu}/>
-      <Route exact path={ROUTES.GAME_OPTIONS} component={GameOptions}/>
-      <Route exact path={ROUTES.GAME} component={Game}/>
-      <Route exact path={ROUTES.SETTINGS} component={Settings}/>
-      <Route exact path={ROUTES.INSTRUCTIONS} component={Instructions}/>
+      <Route exact path={ROUTES.MENU} component={Menu} />
+      <Route exact path={ROUTES.GAME_OPTIONS} component={GameOptions} />
+      <Route exact path={ROUTES.GAME} component={Game} />
+      <Route exact path={ROUTES.SETTINGS} component={Settings} />
+      <Route exact path={ROUTES.INSTRUCTIONS} component={Instructions} />
     </Box>
   );
-}
+};
 
 export default Main;

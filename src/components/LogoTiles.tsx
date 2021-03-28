@@ -1,9 +1,11 @@
-import { Box, makeStyles, Theme, Typography } from "@material-ui/core";
-import React, { useContext } from "react";
-import { Players } from "../constants";
-import { PlayerColorSchemeType, SettingsContext } from "../contexts";
-import { getLabel } from "../utils";
-import { Tile } from "./Tile";
+import {
+  Box, makeStyles, Theme, Typography,
+} from '@material-ui/core';
+import React, { useContext } from 'react';
+import { Players } from '../constants';
+import { PlayerColorSchemeType, SettingsContext } from '../contexts';
+import { getLabel } from '../utils';
+import { Tile } from './Tile';
 
 interface IAnimationLogoProps {
   animate?: boolean;
@@ -12,7 +14,7 @@ interface IAnimationLogoProps {
   hideTitle?: boolean;
 }
 
-const useStyles = makeStyles<Theme, { animate?: boolean; size: number; }>((theme) => ({
+const useStyles = makeStyles<Theme, { animate?: boolean; size: number }>((theme) => ({
   root: ({ animate, size }) => ({
     display: 'flex',
     justifyContent: 'center',
@@ -22,7 +24,7 @@ const useStyles = makeStyles<Theme, { animate?: boolean; size: number; }>((theme
     width: animate ? '100%' : 'auto',
     [theme.breakpoints.down('sm')]: {
       width: animate ? '100vw' : 'auto',
-    }
+    },
   }),
   leftTile: ({ animate }) => ({
     position: animate ? 'absolute' : 'initial',
@@ -38,9 +40,11 @@ const useStyles = makeStyles<Theme, { animate?: boolean; size: number; }>((theme
   }),
 }));
 
-export const LogoTiles: React.FC<IAnimationLogoProps> = ({ animate, colorScheme, size = 80, hideTitle = false }) => {
+export const LogoTiles: React.FC<IAnimationLogoProps> = ({
+  animate, colorScheme, size = 80, hideTitle = false,
+}) => {
   const classes = useStyles({ animate, size });
-  const { playerColorScheme } = useContext(SettingsContext)
+  const { playerColorScheme } = useContext(SettingsContext);
   return (
     <Box>
       <Box className={classes.root}>
@@ -55,13 +59,13 @@ export const LogoTiles: React.FC<IAnimationLogoProps> = ({ animate, colorScheme,
           color={colorScheme ? colorScheme[Players.PLAYER_1] : playerColorScheme[Players.PLAYER_1]}
         />
       </Box>
-      {
-        !hideTitle && (
-          <Box mb={2}>
-            <Typography align="center" variant="h3">{getLabel('logo')}</Typography>
-          </Box>
-        )
-      }
+      {!hideTitle && (
+        <Box mb={2}>
+          <Typography align="center" variant="h3">
+            {getLabel('logo')}
+          </Typography>
+        </Box>
+      )}
     </Box>
-  )
-}
+  );
+};

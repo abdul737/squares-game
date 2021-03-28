@@ -1,0 +1,19 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "extends": ["airbnb-typescript"],
+  "parserOptions": {
+      "project": "./tsconfig.json"
+  },
+  "rules": {
+    "import/prefer-default-export": 0,
+    "react/prop-types": 0,
+    "react/no-array-index-key": 0,
+    "@typescript-eslint/no-shadow": 0,
+    "prefer-destructuring": 0,
+    "import/no-cycle": 0
+  }
+}

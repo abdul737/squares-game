@@ -1,4 +1,4 @@
-import { useMediaQuery, useTheme } from "@material-ui/core";
+import { useMediaQuery, useTheme } from '@material-ui/core';
 
 export const useMediaUp = (breakpoint: number | 'xs' | 'sm' | 'md' | 'lg' | 'xl') => {
   const theme = useTheme();

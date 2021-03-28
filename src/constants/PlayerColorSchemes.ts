@@ -1,5 +1,5 @@
-import { PlayerColorSchemeType } from "../contexts";
-import { Players } from "./GameConstants";
+import { PlayerColorSchemeType } from '../contexts';
+import { Players } from './GameConstants';
 
 export const PLAYER_COLOR_SCHEMES: PlayerColorSchemeType[] = [
   {

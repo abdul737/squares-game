@@ -1,1 +1,1 @@
-import './tileAnimations.css'
+import './tileAnimations.css';

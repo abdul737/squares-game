@@ -1,8 +1,8 @@
-import React, { useContext, useMemo } from "react";
-import { Paper, makeStyles, Theme } from "@material-ui/core";
-import { Players } from "../constants";
-import { useMediaDown } from "../utils";
-import { GameContext, SettingsContext } from "../contexts";
+import React, { useContext, useMemo } from 'react';
+import { Paper, makeStyles, Theme } from '@material-ui/core';
+import { Players } from '../constants';
+import { useMediaDown } from '../utils';
+import { SettingsContext, GameContext } from '../contexts';
 
 interface ITileProps {
   index?: number;
@@ -35,26 +35,30 @@ const useStyles = makeStyles<Theme, IUseStylesProps>((theme) => ({
   }),
 }));
 
-export const Tile: React.FC<ITileProps> = ({ index, size, value, onClick, className, color }) => {
+export const Tile: React.FC<ITileProps> = ({
+  index, size, value, onClick, className, color,
+}) => {
   const { boardSize, playerColorScheme } = useContext(SettingsContext);
   const { turn } = useContext(GameContext);
   const isMobileScreen = useMediaDown('xs');
   const isSmallMobileScreen = useMediaDown(345);
+  const mobileTileSize = useMemo(
+    () => (isSmallMobileScreen ? 245 / boardSize : 300 / boardSize),
+    [isSmallMobileScreen, boardSize],
+  );
   const tileSize = useMemo(
-    () => size || (isMobileScreen ? isSmallMobileScreen ? 245 / boardSize : 300 / boardSize : 530 / boardSize),
-    [size, isMobileScreen, isSmallMobileScreen, boardSize]
-  )
+    () => size || (isMobileScreen ? mobileTileSize : 530 / boardSize),
+    [size, isMobileScreen, isSmallMobileScreen, boardSize],
+  );
 
   const classes = useStyles({
     tileSize,
     tileColor: color || (value && playerColorScheme[value]),
-    nextColor: playerColorScheme[turn]
+    nextColor: playerColorScheme[turn],
   });
 
   const handleClick = () => {
-    onClick && index !== undefined && onClick(index)
-  }
-  return (
-    <Paper onClick={handleClick} className={`${classes.paper} ${className}`}></Paper>
-  )
-}
+    if (onClick && index !== undefined) onClick(index);
+  };
+  return <Paper onClick={handleClick} className={`${classes.paper} ${className}`} />;
+};

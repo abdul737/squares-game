@@ -1,6 +1,6 @@
 interface IBoardSizeObject {
   value: number;
-  label: 'x3' | 'x4'| 'x6' | 'x8';
+  label: 'x3' | 'x4' | 'x6' | 'x8';
 }
 
 export const BOARD_SIZES: IBoardSizeObject[] = [
