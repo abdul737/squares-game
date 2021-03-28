@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/static/css/main.2ec19a04.chunk.css",
-    "main.js": "/static/js/main.61f32730.chunk.js",
-    "main.js.map": "/static/js/main.61f32730.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.cdff4940.js",
-    "runtime-main.js.map": "/static/js/runtime-main.cdff4940.js.map",
-    "static/js/2.e3fe68e8.chunk.js": "/static/js/2.e3fe68e8.chunk.js",
-    "static/js/2.e3fe68e8.chunk.js.map": "/static/js/2.e3fe68e8.chunk.js.map",
-    "index.html": "/index.html",
-    "static/css/main.2ec19a04.chunk.css.map": "/static/css/main.2ec19a04.chunk.css.map",
-    "static/js/2.e3fe68e8.chunk.js.LICENSE.txt": "/static/js/2.e3fe68e8.chunk.js.LICENSE.txt"
+    "main.css": "/squares-game/static/css/main.2ec19a04.chunk.css",
+    "main.js": "/squares-game/static/js/main.61f32730.chunk.js",
+    "main.js.map": "/squares-game/static/js/main.61f32730.chunk.js.map",
+    "runtime-main.js": "/squares-game/static/js/runtime-main.8da55cec.js",
+    "runtime-main.js.map": "/squares-game/static/js/runtime-main.8da55cec.js.map",
+    "static/js/2.e3fe68e8.chunk.js": "/squares-game/static/js/2.e3fe68e8.chunk.js",
+    "static/js/2.e3fe68e8.chunk.js.map": "/squares-game/static/js/2.e3fe68e8.chunk.js.map",
+    "index.html": "/squares-game/index.html",
+    "static/css/main.2ec19a04.chunk.css.map": "/squares-game/static/css/main.2ec19a04.chunk.css.map",
+    "static/js/2.e3fe68e8.chunk.js.LICENSE.txt": "/squares-game/static/js/2.e3fe68e8.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.cdff4940.js",
+    "static/js/runtime-main.8da55cec.js",
     "static/js/2.e3fe68e8.chunk.js",
     "static/css/main.2ec19a04.chunk.css",
     "static/js/main.61f32730.chunk.js"
