@@ -2,6 +2,7 @@ import { Box, makeStyles, Theme, Typography } from "@material-ui/core";
 import React, { useContext } from "react";
 import { Players } from "../constants";
 import { PlayerColorSchemeType, SettingsContext } from "../contexts";
+import { getLabel } from "../utils";
 import { Tile } from "./Tile";
 
 interface IAnimationLogoProps {
@@ -40,25 +41,27 @@ const useStyles = makeStyles<Theme, { animate?: boolean; size: number; }>((theme
 export const LogoTiles: React.FC<IAnimationLogoProps> = ({ animate, colorScheme, size = 80, hideTitle = false }) => {
   const classes = useStyles({ animate, size });
   const { playerColorScheme } = useContext(SettingsContext)
-  return <Box>
-    <Box className={classes.root}>
-      <Tile
-        size={size}
-        className={classes.leftTile}
-        color={colorScheme ? colorScheme[Players.PLAYER_1] : playerColorScheme[Players.PLAYER_1]}
-      />
-      <Tile
-        size={size}
-        className={classes.rightTile}
-        color={colorScheme ? colorScheme[Players.PLAYER_2] : playerColorScheme[Players.PLAYER_2]}
-      />
+  return (
+    <Box>
+      <Box className={classes.root}>
+        <Tile
+          size={size}
+          className={classes.rightTile}
+          color={colorScheme ? colorScheme[Players.PLAYER_2] : playerColorScheme[Players.PLAYER_2]}
+        />
+        <Tile
+          size={size}
+          className={classes.leftTile}
+          color={colorScheme ? colorScheme[Players.PLAYER_1] : playerColorScheme[Players.PLAYER_1]}
+        />
+      </Box>
+      {
+        !hideTitle && (
+          <Box mb={2}>
+            <Typography align="center" variant="h3">{getLabel('logo')}</Typography>
+          </Box>
+        )
+      }
     </Box>
-    {
-      !hideTitle && (
-        <Box mb={2}>
-          <Typography align="center" variant="h3">Squares Game</Typography>
-        </Box>
-      )
-    }
-  </Box>
+  )
 }

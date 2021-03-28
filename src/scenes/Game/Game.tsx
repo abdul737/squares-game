@@ -6,6 +6,7 @@ import { GameContext, SettingsContext } from "../../contexts";
 import { getLabel, useMediaDown } from "../../utils";
 import { GameOverOverlay } from "./GameOverOverlay";
 import { Board } from './Board';
+import { ScoresBoard } from "./ScoresBoard";
 
 const useStyles = makeStyles<Theme, { tileMargin: number }>((theme) => ({
   root: {
@@ -51,6 +52,7 @@ export const Game: React.FC = () => {
           {`Turn: ${playerNames[turn] || turn}`}
         </Typography>
       </Box>
+      <ScoresBoard/>
       <Board />
       { isGameOver && <GameOverOverlay /> }
       <Box className={classes.navigationButton}>

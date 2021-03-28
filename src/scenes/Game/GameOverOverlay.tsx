@@ -1,29 +1,12 @@
+import React, { useContext } from "react";
 import { Box, Typography, makeStyles } from "@material-ui/core"
-import { useContext } from "react";
 import { NavigationButton, Tile } from "../../components";
 import { ROUTES } from "../../constants";
 import { GameContext, SettingsContext } from "../../contexts";
 import { getLabel } from "../../utils";
 
 const useStyles = makeStyles(theme => ({
-  gameTurn: {
-    display: 'flex',
-    alignItems: 'center',
-    marginBottom: theme.spacing(2),
-  },
-  turnTile: {
-    marginRight: theme.spacing(2),
-  },
-  turnLabel: {
-    color: theme.palette.primary.contrastText,
-    '&.gameOver': {
-      color: theme.palette.warning.light,
-    },
-  },
-  navigationButton: {
-    marginTop: theme.spacing(1),
-  },
-  boardOverlay: {
+  root: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -40,23 +23,33 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
     alignItems: 'center',
   },
+  gameTurn: {
+    display: 'flex',
+    alignItems: 'center',
+    marginBottom: theme.spacing(2),
+  },
+  winnerTile: {
+    marginRight: theme.spacing(2),
+  },
+  endGameLabel: {
+    color: theme.palette.warning.light,
+  },
+  navigationButton: {
+    marginTop: theme.spacing(1),
+  },
 }));
 
 export const GameOverOverlay: React.FC = () => {
-  const { playerNames } = useContext(SettingsContext);
-  const {
-    isGameOver,
-    winner,
-    restartGame
-  } = useContext(GameContext);
   const classes = useStyles();
+  const { playerNames } = useContext(SettingsContext);
+  const { winner, restartGame } = useContext(GameContext);
 
   return (
-    <Box className={classes.boardOverlay}>
+    <Box className={classes.root}>
       <Box className={classes.overlayContent}>
         <Box className={classes.gameTurn}>
-          {winner !== null && <Tile className={classes.turnTile} size={34} value={winner}/>}
-          <Typography variant="h4" className={`${classes.turnLabel} ${isGameOver && 'gameOver'}`}>
+          {winner !== null && <Tile className={classes.winnerTile} size={34} value={winner}/>}
+          <Typography variant="h4" className={classes.endGameLabel}>
             {winner !== null ? `${playerNames[winner] || winner} won!` : 'Game over, Draw'}
           </Typography>
         </Box>

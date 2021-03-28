@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { Box, makeStyles } from "@material-ui/core";
+import { Box, makeStyles, Typography } from "@material-ui/core";
 import { LogoTiles, NavigationButton } from "../../components";
 import { ROUTES } from "../../constants";
 import { getLabel } from "../../utils";
@@ -23,10 +23,16 @@ export const Instructions: React.FC = () => {
 
   return <Box className={classes.root}>
     <LogoTiles />
-    Instructions page
-
-    <Box>
-        <NavigationButton path={ROUTES.MENU} color="primary">{getLabel('goBack')}</NavigationButton>
+    <Box maxWidth="400px" p="15px">
+      <Typography variant="h5">{getLabel('instructions')}</Typography>
+      <Box mt="10px">
+        <Typography variant="body1">
+          {getLabel('instructionsPageContent')}
+        </Typography>
       </Box>
+    </Box>
+    <Box mt="25px">
+      <NavigationButton path={ROUTES.MENU} color="primary">{getLabel('goBack')}</NavigationButton>
+    </Box>
   </Box>
 }

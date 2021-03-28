@@ -8,6 +8,7 @@ interface IDefaultGameState {
   turn: Players;
   isGameOver: boolean;
   winner: Players | null;
+  maxScores: { [key in Players]: number; };
 }
 
 interface IGameContextState extends IDefaultGameState {
@@ -26,6 +27,10 @@ const defaultGameState: IDefaultGameState = {
   turn: Players.PLAYER_1,
   isGameOver: false,
   winner: null,
+  maxScores: {
+    [Players.PLAYER_1]: 0,
+    [Players.PLAYER_2]: 0,
+  },
 }
 
 export const GameContextProvider: React.FC = ({ children }) => {
@@ -41,7 +46,7 @@ export const GameContextProvider: React.FC = ({ children }) => {
    */
    const getPlayerSquares = useCallback(
     (player: Players, squares: any[], i: number = 0, usedIndexes: number[] = []): number => {
-      if (squares[i] !== player || usedIndexes.includes(i)) {
+      if (!squares[i] || squares[i] !== player || usedIndexes.includes(i)) {
         return 0;
       }
       usedIndexes.push(i)
@@ -56,23 +61,33 @@ export const GameContextProvider: React.FC = ({ children }) => {
    * Finds winner or draw
    */
    const getWinner = useCallback((): Players | null => {
-    const max = {
+    if (state.maxScores[Players.PLAYER_1] > state.maxScores[Players.PLAYER_2]) {
+      return Players.PLAYER_1;
+    } else if (state.maxScores[Players.PLAYER_2] > state.maxScores[Players.PLAYER_1]) {
+      return Players.PLAYER_2;
+    }
+    return null
+  }, [state.maxScores])
+
+  /**
+   * Updates maximum scores object for each player, after each move
+   */
+  useEffect(() => {
+    const maxScores = {
       [Players.PLAYER_1]: 0,
       [Players.PLAYER_2]: 0,
     }
     state.squares.forEach((player, startIndex) => {
       const count = getPlayerSquares(player, state.squares, startIndex);
-      if (count > max[player]) {
-        max[player] = count;
+      if (count > maxScores[player]) {
+        maxScores[player] = count;
       }
     })
-    if (max[Players.PLAYER_1] > max[Players.PLAYER_2]) {
-      return Players.PLAYER_1;
-    } else if (max[Players.PLAYER_2] > max[Players.PLAYER_1]) {
-      return Players.PLAYER_2;
-    }
-    return null
-  }, [state.squares, getPlayerSquares])
+    setState(state => ({
+      ...state,
+      maxScores,
+    }))
+  }, [state.squares, setState, getPlayerSquares])
 
   useEffect(() => {
     if (state.squares.every(square => !!square)) {

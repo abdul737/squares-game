@@ -45,7 +45,7 @@ export const Settings: React.FC = () => {
     <Box className={classes.root}>
       <LogoTiles />
       <Box display="flex">
-        <Box mt={1.5} mr={2}>
+        <Box mt={4} mr={3}>
           <FormLabel component="legend">{getLabel('colorScheme')}:</FormLabel>
         </Box>
         <Box>
