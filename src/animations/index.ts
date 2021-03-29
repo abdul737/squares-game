@@ -1,1 +1,2 @@
-import './tileAnimations.css';
+import './tileAnimations.scss';
+import './congratsConfetti.scss';

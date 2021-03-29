@@ -61,7 +61,7 @@ export const LogoTiles: React.FC<IAnimationLogoProps> = ({
       </Box>
       {!hideTitle && (
         <Box mb={2}>
-          <Typography align="center" variant="h3">
+          <Typography data-testid="gameLogo" align="center" variant="h3">
             {getLabel('logo')}
           </Typography>
         </Box>

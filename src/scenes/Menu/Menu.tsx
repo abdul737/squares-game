@@ -30,13 +30,13 @@ export const Menu: React.FC = () => {
     <Box className={classes.menu}>
       <LogoTiles animate />
       {canResume && (
-        <Box className={classes.menuItem}>
+        <Box className={classes.menuItem} data-testid="resumeGameButton">
           <NavigationButton path={ROUTES.GAME} color="primary">
             {getLabel('resumeGame')}
           </NavigationButton>
         </Box>
       )}
-      <Box className={classes.menuItem}>
+      <Box className={classes.menuItem} data-testid="startGameButton">
         <NavigationButton path={ROUTES.GAME_OPTIONS} color={canResume ? 'secondary' : 'primary'}>
           {getLabel('startGame')}
         </NavigationButton>

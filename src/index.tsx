@@ -1,15 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './index.scss';
 import './animations';
 import Main from './Main';
 import { Providers } from './Providers';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Providers>
-      <Main />
-    </Providers>
-  </React.StrictMode>,
+  <Providers>
+    <Main />
+  </Providers>,
   document.getElementById('root'),
 );

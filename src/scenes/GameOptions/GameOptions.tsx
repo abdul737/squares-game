@@ -49,7 +49,7 @@ export const GameOptions: React.FC = () => {
   };
 
   return (
-    <Box className={classes.root}>
+    <Box className={classes.root} data-testid="gameOptionsScene">
       <LogoTiles />
       <ChooseBoardSize boardSize={boardSize} setBoardSize={setBoardSize} />
       <PlayerNames playerNames={playerNames} setPlayerName={setPlayerName} />

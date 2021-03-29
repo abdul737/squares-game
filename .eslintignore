@@ -2,3 +2,4 @@ node_modules
 build
 webpack
 webpack.config.js
+jest.config.ts
