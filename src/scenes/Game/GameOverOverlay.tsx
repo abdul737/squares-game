@@ -96,17 +96,17 @@ export const GameOverOverlay: React.FC = () => {
             winner === null ? (
               <>
                 <Typography variant="h3" className={classes.endGameLabel}>
-                  Draw!
+                  {getLabel('draw')}
                 </Typography>
                 <Typography variant="h6" className={classes.endGameLabel}>
-                  You both scored the same
+                  {getLabel('youScoredTheSame')}
                 </Typography>
               </>
             ) : (
               <Box className={classes.gameTurn}>
                 <Tile className={classes.winnerTile} size={34} value={winner} />
                 <Typography variant="h4" className={classes.endGameLabel}>
-                  {`Congratulations, ${playerNames[winner] || winner} won!`}
+                  {`${getLabel('congratulations')}, ${playerNames[winner] || winner} ${getLabel('won')}!`}
                 </Typography>
               </Box>
             )

@@ -52,11 +52,13 @@ export const LogoTiles: React.FC<IAnimationLogoProps> = ({
           size={size}
           className={classes.rightTile}
           color={colorScheme ? colorScheme[Players.PLAYER_2] : playerColorScheme[Players.PLAYER_2]}
+          disableHoverAnimation
         />
         <Tile
           size={size}
           className={classes.leftTile}
           color={colorScheme ? colorScheme[Players.PLAYER_1] : playerColorScheme[Players.PLAYER_1]}
+          disableHoverAnimation
         />
       </Box>
       {!hideTitle && (

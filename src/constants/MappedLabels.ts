@@ -19,4 +19,8 @@ export const MAPPED_LABELS = {
   instructionsPageContent:
     'Squares is a simple two player game where a square shaped game board is split to N*N squares. (2 ≤ N ≤ 8) Each player marks a square on their turn and at the end, the player with the biggest directly connecting squares group wins.',
   score: 'Score',
+  draw: 'Draw!',
+  youScoredTheSame: 'You both scored the same',
+  congratulations: 'Congratulations',
+  won: 'won',
 };

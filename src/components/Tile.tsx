@@ -11,21 +11,23 @@ interface ITileProps {
   size?: number;
   color?: string;
   className?: string;
+  disableHoverAnimation?: boolean;
 }
 
 interface IUseStylesProps {
   tileSize: number;
   tileColor?: string;
+  disableHoverAnimation?: boolean;
 }
 
 const useStyles = makeStyles<Theme, IUseStylesProps>((theme) => ({
-  paper: ({ tileSize, tileColor }) => ({
+  paper: ({ tileSize, tileColor, disableHoverAnimation }) => ({
     height: tileSize,
     width: tileSize,
     textAlign: 'center',
     color: theme.palette.text.secondary,
     backgroundColor: tileColor || theme.palette.common.white,
-    '&:hover, &:active': {
+    '&:hover, &:active': disableHoverAnimation ? {} : {
       animationDuration: '200ms',
       animationName: tileColor ? '' : 'emptyTileHover',
       animationFillMode: 'forwards',
@@ -34,7 +36,13 @@ const useStyles = makeStyles<Theme, IUseStylesProps>((theme) => ({
 }));
 
 export const Tile: React.FC<ITileProps> = ({
-  index, size, value, onClick, className = '', color,
+  index,
+  size,
+  value,
+  onClick,
+  className = '',
+  color,
+  disableHoverAnimation,
 }) => {
   const { boardSize, playerColorScheme } = useContext(SettingsContext);
   const isMobileScreen = useMediaDown('xs');
@@ -51,6 +59,7 @@ export const Tile: React.FC<ITileProps> = ({
   const classes = useStyles({
     tileSize,
     tileColor: color || (value && playerColorScheme[value]),
+    disableHoverAnimation,
   });
 
   const handleClick = () => {

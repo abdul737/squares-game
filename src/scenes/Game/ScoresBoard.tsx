@@ -29,7 +29,7 @@ export const ScoresBoard: React.FC = () => {
       </Box>
       <Box>
         <Typography variant="h6" className={classes.text} align="right">
-          {playerNames[Players.PLAYER_2] || Players.PLAYER_1}
+          {playerNames[Players.PLAYER_2] || Players.PLAYER_2}
         </Typography>
         <Typography className={classes.text} align="right">
           {getLabel('score')}
